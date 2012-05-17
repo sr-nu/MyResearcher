@@ -1,9 +1,28 @@
 
 window.onload = function() { 
-  printBookmarks('0'); 
+  // printBookmarks('0'); 
   // chrome.tabs.create({url: "india "+google_query});
+
+  chrome.bookmarks.getTree(function(bookmarks) {
+    printBookmarksOne(bookmarks);
+    setTimeout(function() {openTab();},2250);
+  });
 };
 
+function openTab(){
+  chrome.tabs.create({url: "http://www.google.co.in/#q=india"+document.body.innerHTML})
+}
+
+function printBookmarksOne(bookmarks) {
+  bookmarks.forEach(function(bookmark) {
+    if(isUrl(bookmark.url)){
+        document.body.innerHTML += encodeURIComponent("site:"+bookmark.url) + "+OR+";
+        // google_query += " site:"+bookmark.url+" OR "
+    }
+    if (bookmark.children)
+      printBookmarksOne(bookmark.children);
+  });
+}
 
 
 function printBookmarks(id) {
