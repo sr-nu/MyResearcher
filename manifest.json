@@ -8,11 +8,7 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs",
     "bookmarks",
-    "history",
-    "http://api.flickr.com/",
-    "http://*.google.com",
-    "http://*.google.co.in"
+    "tabs"
   ]
 }
