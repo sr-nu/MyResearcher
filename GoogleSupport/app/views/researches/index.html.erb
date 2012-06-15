@@ -9,4 +9,8 @@
   <input type="submit" name="sa" value="Search" />
 </form>
 <script type="text/javascript" src="http://www.google.com/cse/tools/onthefly?form=searchbox_demo&lang="></script>
-                                
+
+The bookmarks
+<% params[:bookmarks].split('__').each do |bookmark| %>
+    <%= link_to ('value', bookmark) %>  
+<% end %>

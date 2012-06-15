@@ -1,8 +1,5 @@
 
 window.onload = function() { 
-  // printBookmarks('0'); 
-  // chrome.tabs.create({url: "india "+google_query});
-
   chrome.bookmarks.getTree(function(bookmarks) {
     printBookmarksOne(bookmarks);
     setTimeout(function() {openTab();},2250);
@@ -10,14 +7,13 @@ window.onload = function() {
 };
 
 function openTab(){
-  chrome.tabs.create({url: "http://www.google.co.in/#q=india"+document.body.innerHTML})
+  chrome.tabs.create({url: "http://localhost:3000/researches?bookmarks="+document.body.innerHTML})
 }
 
 function printBookmarksOne(bookmarks) {
   bookmarks.forEach(function(bookmark) {
     if(isUrl(bookmark.url)){
-        document.body.innerHTML += encodeURIComponent("site:"+bookmark.url) + "+OR+";
-        // google_query += " site:"+bookmark.url+" OR "
+        document.body.innerHTML += encodeURIComponent(bookmark.url) + "__";
     }
     if (bookmark.children)
       printBookmarksOne(bookmark.children);
