@@ -2,6 +2,10 @@ class ResearchesController < ActionController::Base
   respond_to  :json,:html
   protect_from_forgery
 
+  def index
+    @researches = Research.all
+  end
+
   def show
   	@research = Research.find(params[:id])
   	respond_with(@research)
