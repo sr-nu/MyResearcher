@@ -1,15 +1,16 @@
 class ResearchesController < ActionController::Base
-  grant :all, :show, :create
-  respond_to  :json
+  respond_to  :json,:html
   protect_from_forgery
 
   def show
   	@research = Research.find(params[:id])
-  	respond_wth(@research)
+  	respond_with(@research)
   end
 
   def create
-  	Research.create('bookmarks' => params[:bookmarks]).id
+  	research = Research.create('bookmarks' => params[:bookmarks])
+    # render :json => research.to_json
+    head :ok
   end
 
 end
