@@ -1,11 +1,15 @@
 class ResearchesController < ActionController::Base
-  grant :all, :index
+  grant :all, :show, :create
+  respond_to  :json
   protect_from_forgery
 
-  def index
+  def show
+  	@research = Research.find(params[:id])
+  	respond_wth(@research)
   end
 
   def create
+  	Research.create('bookmarks' => params[:bookmarks]).id
   end
 
 end
