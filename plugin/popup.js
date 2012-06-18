@@ -11,6 +11,7 @@ function send_request(){
   req.open(
       "POST",
       "http://googlesupport.heroku.com/researches?bookmarks="+document.body.innerHTML,
+      // "http://localhost:3000/researches?bookmarks="+document.body.innerHTML,
       true);
   openTab();
   // document.body.innerHTML = 'loading';
@@ -32,7 +33,8 @@ function showPhotos() {
 
 
 function openTab(){
-  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/8"})
+  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/1"})
+  // chrome.tabs.create({url: "http://localhost:3000/researches/8"})
 }
 
 function printBookmarksOne(bookmarks) {

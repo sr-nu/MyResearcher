@@ -2,8 +2,9 @@ class ResearchesController < ActionController::Base
   respond_to  :json,:html
   protect_from_forgery
 
+  #index files
   def index
-    @researches = Research.all
+    @researches = Research.all || []
   end
 
   def show
