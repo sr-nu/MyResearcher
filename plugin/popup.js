@@ -8,33 +8,30 @@ window.onload = function() {
 
 function send_request(){
   var req = new XMLHttpRequest();
+
+  req.onreadystatechange=function()
+  {
+    if (req.readyState==4)
+      {
+        document.body.innerHTML = "response is:" + req.responseXML + " -> "+req.responseText + "->" +req.responseJSON;
+        openTab(req.responseText);
+      }
+  }
+
   req.open(
       "POST",
-      "http://googlesupport.heroku.com/researches?bookmarks="+document.body.innerHTML,
-      // "http://localhost:3000/researches?bookmarks="+document.body.innerHTML,
+      // "http://googlesupport.heroku.com/researches?bookmarks="+document.body.innerHTML,
+      "http://localhost:3000/researches?bookmarks="+document.body.innerHTML+"&callback=?",
       true);
-  openTab();
-  // document.body.innerHTML = 'loading';
-  // req.onload = openTab;
-  req.send(null);
+  req.setRequestHeader('Accept', 'application/json');
+  req.overrideMimeType("application/json");  
+  req.send();
 }
 
 
-
-function showPhotos() {
-  // var photos = req.responseXML.getElementsByTagName("photo");
-
-  // for (var i = 0, photo; photo = photos[i]; i++) {
-  //   var img = document.createElement("image");
-  //   img.src = constructImageURL(photo);
-  //   document.body.appendChild(img);
-  // }
-}
-
-
-function openTab(){
-  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/1"})
-  // chrome.tabs.create({url: "http://localhost:3000/researches/8"})
+function openTab(bookmarks_id){
+  // chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/"+bookmarks_id});
+  chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id});
 }
 
 function printBookmarksOne(bookmarks) {
@@ -55,7 +52,6 @@ function printBookmarks(id) {
       console.debug(bookmark.title);
       if(isUrl(bookmark.url)){
         document.body.innerHTML += bookmark.url + "<br/>";
-        // google_query += " site:"+bookmark.url+" OR "
       }
       printBookmarks(bookmark.id);
     });

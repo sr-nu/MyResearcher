@@ -12,10 +12,18 @@ class ResearchesController < ActionController::Base
   	respond_with(@research)
   end
 
+  def new
+    @research = Research.new()
+  end
+
   def create
-  	research = Research.create('bookmarks' => params[:bookmarks])
-    # render :json => research.to_json
-    head :ok
+  	@research = Research.create('bookmarks' => params[:bookmarks])
+    respond_to do |format|
+      format.json { render :json => @research.id }
+      format.html { render :text => @research.id }
+      format.xml { render :xml => @research.id }
+    end
+    
   end
 
 end
