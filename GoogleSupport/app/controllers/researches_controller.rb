@@ -2,7 +2,7 @@ class ResearchesController < ActionController::Base
   respond_to  :json,:html
   protect_from_forgery
 
-  #index files
+  index files
   def index
     @researches = Research.all || []
   end
@@ -10,7 +10,7 @@ class ResearchesController < ActionController::Base
   def show
     if Research.exists?(params[:id])
       @research = Research.find(params[:id])
-      Research.find(params[:id]).delete
+      # Research.find(params[:id]).delete
     else
         flash[:error] = "Your content is no longer available, Kindly close this window and click on your chrome extention to search...."
     end

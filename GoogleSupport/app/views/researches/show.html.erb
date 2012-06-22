@@ -12,11 +12,11 @@
 </form>
 <script type="text/javascript" src="http://www.google.com/cse/tools/onthefly?form=searchbox_demo&lang="></script>
 
-<!-- <div style="display:none;visibility:hidden;"> -->
+	<div style="display:none;visibility:hidden;">
 		<% @research.bookmarks.split('__').each do |bookmark| %>
 		  <%= link_to bookmark,bookmark %>  <br/>
 		<% end %>
+	</div>
 	<% elsif %>
 	<div style="font-family:arial;color:#999999;padding:0 0px 10px">Your content is no longer available. Click the 'My Bookmark Search' icon on your Chrome Browser....</div>
 	<% end %>
-<!-- </div> -->
