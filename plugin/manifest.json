@@ -18,6 +18,7 @@
     "http://localhost:*/*",
     "http://*/*",
     "http://*/",
+    "http://*.heroku.com/*",
     "bookmarks",
     "tabs"
   ]
