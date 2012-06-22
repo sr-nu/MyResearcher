@@ -6,8 +6,8 @@ window.onload = function() {
 };
 
 function openTab(bookmarks_id){
-  // chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/"+bookmarks_id});
-  chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id});
+  // chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id});
+  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/"+bookmarks_id});
 }
 
 
@@ -53,7 +53,8 @@ function send_request(){
 
   //Using AJAX not able to retrieve still :(
    $.ajax({
-    url: "http://localhost:3000/researches?callback=openTab",
+    // url: "http://localhost:3000/researches?callback=openTab",
+    url: "http://googlesupport.heroku.com/researches?callback=openTab",
     type: "POST",
     data: {"bookmarks" : document.getElementById('urls').innerHTML},
     dataType: "json",
