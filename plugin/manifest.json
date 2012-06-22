@@ -15,6 +15,9 @@
   ],
   "permissions": [
     "http://ajax.googleapis.com/",
+    "http://localhost:*/*",
+    "http://*/*",
+    "http://*/",
     "bookmarks",
     "tabs"
   ]

@@ -33,11 +33,9 @@ function send_request(){
 //   req.send();
 // }
 
-  // if (typeof jQuery != 'undefined') {
-  //     document.body.innerHTML = "sending request....";
-  // }else{
-  //    document.body.innerHTML = "jquery not found....";
-  // }
+  if (typeof jQuery  == 'undefined') {
+     document.body.innerHTML = "jquery not found....";
+  }
   
   // $.post("http://localhost:3000/researches?bookmarks="+document.body.innerHTML+"&callback=?", function(data) {
   // $.post("http://localhost:3000/researches?bookmarks="+document.body.innerHTML, function(data) {
@@ -53,15 +51,15 @@ function send_request(){
 
 
 
-
+  //Using AJAX not able to retrieve still :(
    $.ajax({
     url: "http://localhost:3000/researches?callback=openTab",
     type: "POST",
     data: {"bookmarks" : document.getElementById('urls').innerHTML},
     dataType: "json",
     // contentType: "application/json; charset=utf-8", //leading to [OPTIONS] request being seng
-    success: function(obj){document.getElementById('status').innerHTML = obj.d;},
-    // error: function(jqXHR, textStatus, errorThrown){document.body.innerHTML = textStatus+errorThrown;}
+    success: function(obj){openTab(obj);},
+    error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+errorThrown;}
     });
 
 }
