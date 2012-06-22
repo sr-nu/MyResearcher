@@ -1,11 +1,12 @@
 {
-  "name": "My ReSearcher",
+  "name": "My Bookmark Searcher",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "Searches everything from the bookmarked websites",
+  "description": "Searches the content of bookmarked websites using power of Google",
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "My Bookmark Searcher"
   },
   "content_scripts": [
     {
@@ -21,4 +22,3 @@
     "tabs"
   ]
 }
-
