@@ -14,6 +14,7 @@
       "js": ["jquery.js", "popup.js"]
     }
   ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "permissions": [
     "http://ajax.googleapis.com/",
     "http://localhost:*/*",
