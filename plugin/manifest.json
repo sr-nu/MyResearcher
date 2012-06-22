@@ -16,8 +16,6 @@
   "permissions": [
     "http://ajax.googleapis.com/",
     "http://localhost:*/*",
-    "http://*/*",
-    "http://*/",
     "http://*.heroku.com/*",
     "bookmarks",
     "tabs"
