@@ -1,15 +1,11 @@
 function save_options() {
   var days = document.getElementById("days");
-  // Get a value saved in a form.
   var theValue = days.value;
-  // Check that there's some code there.
   if (!theValue) {
-    message('Error: No value specified');
+    document.getElementById("status").innerText = 'Error: No value specified';
     return;
   }
-  // Save it using the Chrome extension storage API.
   chrome.storage.local.set({'days': theValue}, function() {
-    // Notify that we saved.
   	document.getElementById("status").innerText = 'saved';
   });
 }

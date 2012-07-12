@@ -1,12 +1,41 @@
 <html>
 <head><title>My Test Extension Options</title>
-    <script type="text/javascript" src="options.js"></script>  
+  <script type="text/javascript" src="options.js"></script>  
+	<style>
+		body {
+			font-family:Helvetica,sans-serif;
+		}
+	  span {
+	  	font-family:Helvetica,sans-serif;
+	  	color:#999999;
+	  }
+	  .small{
+	  	font-size:10px;
+	  }
+	  .red {
+	  	color:#ff0000;
+	  }
+	  button{
+			font-size: 12px;
+			margin-bottom: 0;
+			padding: 3px 12px;
+			margin: 0em;
+			font: -webkit-small-control;
+			color: initial;
+			letter-spacing: normal;
+			line-height: normal;
+			text-transform: none;
+			text-indent: 0px;
+			color: buttontext;
+		}
+	</style>
 </head>
 <body>
-<span id="status"></span><br/> 
-No. of days of history to search: <input type="text" id="days" value=""/> <br/>
-(specify 0 if you don't want your history to be searched)
-<br>
+<span class="red" id="status"></span>
+<h3>Custom Settings</h3>
+History to search: <input type="text" id="days" value=""/> days<br/>
+<span class="small"> (specify 0 if you don't want your history to be searched) </span>
+<br/><br/><br/>
 <button>Save</button>
 </body>
 </html>
