@@ -3,7 +3,7 @@
   "options_page": "options.html",
   "version": "1.4",
   "manifest_version": 4,
-  "description": "Searches the content of bookmarked websites and visited pages using power of Google",
+  "description": "Searches the content of bookmarked websites and history using power of Google",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*"],
-      "js": ["jquery.js", "popup.js"]
+      "js": ["jquery.js", "popup.js","options.js"]
     }
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

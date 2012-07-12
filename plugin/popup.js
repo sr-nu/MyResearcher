@@ -16,21 +16,28 @@ window.onload = function() {
     }else{
       done = true;
     }
-
   });
 
-  chrome.history.search({
-      'text': '',              // Return every history item....
-      'startTime': (new Date).getTime() - (3600000 * 24 * 7) // that was accessed less than one week ago.
-    },
-    function(historyItems) {
-      printBookmarksOne(historyItems);
-      if(done){
-        send_request();
-      }else{
-        done = true;
+
+  chrome.storage.local.get("days", function(items){
+
+      if (!items["days"]) {
+        return;
       }
-    });
+      var days = items["days"]; 
+      chrome.history.search({
+          'text': '',           // Return every history item....
+          'startTime': (new Date).getTime() - (3600000 * 24 * days) // that was accessed less than one week ago.
+        },
+        function(historyItems) {
+          printBookmarksOne(historyItems);
+          if(done){
+            send_request();
+          }else{
+            done = true;
+          }
+        });
+  });
 };
 
 
