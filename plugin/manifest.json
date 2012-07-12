@@ -1,8 +1,9 @@
 {
   "name": "My Bookmark Searcher",
+  "options_page": "options.html",
   "version": "1.4",
   "manifest_version": 4,
-  "description": "Searches the content of bookmarked websites using power of Google",
+  "description": "Searches the content of bookmarked websites and visited pages using power of Google",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
@@ -19,6 +20,8 @@
     "http://localhost:*/*",
     "http://*.heroku.com/*",
     "bookmarks",
+    "history",
+    "storage",
     "tabs"
   ]
 }

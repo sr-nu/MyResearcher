@@ -7,10 +7,30 @@ window.onload = function() {
   ga.src = 'https://ssl.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 
+  var done = false;
+
   chrome.bookmarks.getTree(function(bookmarks) {
     printBookmarksOne(bookmarks);
-    send_request();
+    if(done){
+      send_request();
+    }else{
+      done = true;
+    }
+
   });
+
+  chrome.history.search({
+      'text': '',              // Return every history item....
+      'startTime': (new Date).getTime() - (3600000 * 24 * 7) // that was accessed less than one week ago.
+    },
+    function(historyItems) {
+      printBookmarksOne(historyItems);
+      if(done){
+        send_request();
+      }else{
+        done = true;
+      }
+    });
 };
 
 
@@ -34,7 +54,7 @@ function send_request(){
   data: {"bookmarks" : links},
   dataType: "json",
   success: function(obj){openTab(obj);},
-  error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+errorThrown;}
+  error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+' '+errorThrown;}
   });
 
 }
@@ -54,4 +74,11 @@ function isUrl(url_string){
   var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
   return re.test(url_string);
 }
+
+
+
+
+
+
+
 
