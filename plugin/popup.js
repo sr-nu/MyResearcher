@@ -8,6 +8,7 @@ window.onload = function() {
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 
   var done = false;
+  var days = 10;
 
   chrome.bookmarks.getTree(function(bookmarks) {
     printBookmarksOne(bookmarks);
@@ -21,10 +22,10 @@ window.onload = function() {
 
   chrome.storage.local.get("days", function(items){
 
-      if (!items["days"]) {
-        return;
+      if (items["days"]) {
+        days = items["days"]; 
       }
-      var days = items["days"]; 
+
       chrome.history.search({
           'text': '',           // Return every history item....
           'startTime': (new Date).getTime() - (3600000 * 24 * days) // that was accessed less than one week ago.
@@ -81,11 +82,3 @@ function isUrl(url_string){
   var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
   return re.test(url_string);
 }
-
-
-
-
-
-
-
-
