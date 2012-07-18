@@ -1,8 +1,8 @@
 {
   "name": "My Bookmark Searcher",
   "options_page": "options.html",
-  "version": "1.11",
-  "manifest_version": 12,
+  "version": "1.15",
+  "manifest_version": 16,
   "description": "Searches the content of bookmarked websites and history.",
   "browser_action": {
     "default_icon": "icon.png",

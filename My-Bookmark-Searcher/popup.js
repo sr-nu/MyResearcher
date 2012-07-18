@@ -9,6 +9,9 @@ window.onload = function() {
 
   var done = false;
   var days = 10;
+  
+  populateGUID();
+
 
   chrome.bookmarks.getTree(function(bookmarks) {
     printBookmarksOne(bookmarks);
@@ -43,10 +46,11 @@ window.onload = function() {
 
 
 var links = "";
+var guid = "";
 
 function openTab(bookmarks_id){
-  // chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id});
-  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/"+bookmarks_id});
+  // chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id+"?r="+guid});
+  chrome.tabs.create({url: "http://googlesupport.heroku.com/researches/"+bookmarks_id+"?r="+guid});
 }
 
 
@@ -55,11 +59,12 @@ function send_request(){
      document.getElementById('status').innerHTML = "jquery not found....";
   }
 
+  document.getElementById('status').innerHTML = "Sending request..."
  $.ajax({
   // url: "http://localhost:3000/researches?callback=openTab",
   url: "http://googlesupport.heroku.com/researches?callback=openTab",
   type: "POST",
-  data: {"bookmarks" : links},
+  data: {"bookmarks" : links, "r" : guid},
   dataType: "json",
   success: function(obj){openTab(obj);},
   error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+' '+errorThrown;}
@@ -76,6 +81,28 @@ function printBookmarksOne(bookmarks) {
       printBookmarksOne(bookmark.children);
     }
   });
+}
+
+
+
+function populateGUID() {
+  if(guid.length <= 0){
+    chrome.storage.local.get("guid", function(items){
+        if (!items["guid"]) {
+          guid = guidGenerator();
+          chrome.storage.local.set({'guid': guid}, function(){});
+        }else{
+          guid = items["guid"]; 
+        }
+    });
+  }
+}
+
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
 function isUrl(url_string){
