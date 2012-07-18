@@ -9,6 +9,9 @@ window.onload = function() {
 
   var done = false;
   var days = 10;
+  
+  populateGUID();
+
 
   chrome.bookmarks.getTree(function(bookmarks) {
     printBookmarksOne(bookmarks);
@@ -43,6 +46,7 @@ window.onload = function() {
 
 
 var links = "";
+var guid = "";
 
 function openTab(bookmarks_id){
   // chrome.tabs.create({url: "http://localhost:3000/researches/"+bookmarks_id});
@@ -59,7 +63,7 @@ function send_request(){
   // url: "http://localhost:3000/researches?callback=openTab",
   url: "http://googlesupport.heroku.com/researches?callback=openTab",
   type: "POST",
-  data: {"bookmarks" : links, r : guidGenerator()},
+  data: {"bookmarks" : links, r : guid},
   dataType: "json",
   success: function(obj){openTab(obj);},
   error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+' '+errorThrown;}
@@ -76,6 +80,21 @@ function printBookmarksOne(bookmarks) {
       printBookmarksOne(bookmark.children);
     }
   });
+}
+
+
+
+function populateGUID() {
+  if(guid.length <= 0){
+    chrome.storage.local.get("guid", function(items){
+        if (!items["guid"]) {
+          guid = guidGenerator();
+          chrome.storage.local.set({'guid': guid}, function(){});
+        }else{
+          guid = items["guid"]; 
+        }
+    });
+  }
 }
 
 function guidGenerator() {

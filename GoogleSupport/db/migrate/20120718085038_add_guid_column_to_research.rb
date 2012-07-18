@@ -3,3 +3,4 @@ class AddGuidColumnToResearch < ActiveRecord::Migration
   	add_column :researches, :guid, :string
   end
 end
+# add guid column
