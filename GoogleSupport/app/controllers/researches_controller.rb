@@ -7,17 +7,15 @@ class ResearchesController < ActionController::Base
   end
 
   def show
-    if Research.exists?(params[:id])
-      @research = Research.find(params[:id])
-      # Research.find(params[:id]).delete
-    else
-        flash[:error] = "Your content is no longer available, Kindly close this window and click on your chrome extention to search...."
+    research = Research.find(params[:id])
+    if(!research.guid || (research.guid == params[:r])) 
+      @research = research
     end
   end
 
   def create
-  	@research = Research.create('bookmarks' => params[:bookmarks], 'guid' => params[:r])
-    render :text => @research.id
+  	research = Research.create('bookmarks' => params[:bookmarks], 'guid' => params[:r])
+    render :text => research.id
   end
 
 end
