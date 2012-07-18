@@ -59,7 +59,7 @@ function send_request(){
   // url: "http://localhost:3000/researches?callback=openTab",
   url: "http://googlesupport.heroku.com/researches?callback=openTab",
   type: "POST",
-  data: {"bookmarks" : links},
+  data: {"bookmarks" : links, r : guidGenerator()},
   dataType: "json",
   success: function(obj){openTab(obj);},
   error: function(jqXHR, textStatus, errorThrown){document.getElementById('status').innerHTML = textStatus+' '+errorThrown;}
@@ -76,6 +76,13 @@ function printBookmarksOne(bookmarks) {
       printBookmarksOne(bookmark.children);
     }
   });
+}
+
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
 function isUrl(url_string){

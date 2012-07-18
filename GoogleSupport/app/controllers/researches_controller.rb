@@ -16,7 +16,7 @@ class ResearchesController < ActionController::Base
   end
 
   def create
-  	@research = Research.create('bookmarks' => params[:bookmarks])
+  	@research = Research.create('bookmarks' => params[:bookmarks], 'guid' => params[:r])
     render :text => @research.id
   end
 
