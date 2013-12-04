@@ -1,8 +1,8 @@
 {
   "name": "My Bookmark Searcher",
   "options_page": "options.html",
-  "version": "1.4",
-  "manifest_version": 4,
+  "version": "2.1",
+  "manifest_version": 2,
   "description": "Searches the content of bookmarked websites and history using power of Google",
   "browser_action": {
     "default_icon": "icon.png",
